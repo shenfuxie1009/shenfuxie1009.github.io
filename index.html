@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>谢深甫 | Personal Homepage</title>
+    <meta name="description" content="谢深甫的个人主页。生物医学工程在读硕士（香港城市大学东莞），专注嵌入式硬件设计、可穿戴超声系统及医疗器械研发。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #1c2333;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff);
+            --border: #30363d;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --tag-bg: rgba(88, 166, 255, 0.1);
+            --tag-border: rgba(88, 166, 255, 0.3);
+            --success: #3fb950;
+            --warning: #d29922;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-card: #ffffff;
+            --text-primary: #1f2328;
+            --text-secondary: #656d76;
+            --accent: #0969da;
+            --accent-hover: #0550ae;
+            --accent-gradient: linear-gradient(135deg, #0969da, #8250df);
+            --border: #d0d7de;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --tag-bg: rgba(9, 105, 218, 0.08);
+            --tag-border: rgba(9, 105, 218, 0.3);
+            --success: #1a7f37;
+            --warning: #9a6700;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        [data-theme="light"] nav { background: rgba(255,255,255,0.85); }
+
+        .nav-container {
+            max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; height: 64px;
+        }
+        .nav-logo {
+            font-weight: 700; font-size: 1.2rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; position: relative;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--accent-gradient); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .theme-toggle {
+            background: none; border: 1px solid var(--border); color: var(--text-secondary);
+            cursor: pointer; padding: 8px; border-radius: 8px; font-size: 1rem;
+            transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+        }
+        .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            color: var(--text-primary); font-size: 1.5rem; cursor: pointer;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(88,166,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(188,140,255,0.05) 0%, transparent 50%);
+            animation: bgfloat 20s ease-in-out infinite;
+        }
+        @keyframes bgfloat {
+            0%, 100% { transform: translate(0,0); }
+            50% { transform: translate(-2%, 2%); }
+        }
+        .hero-content { max-width: 800px; position: relative; z-index: 1; }
+
+        .status {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 4px 12px;
+            background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3);
+            border-radius: 20px; font-size: 0.85rem; color: var(--success); margin-bottom: 1rem;
+        }
+        .status-dot {
+            width: 8px; height: 8px; background: var(--success); border-radius: 50%;
+            animation: pulsedot 2s infinite;
+        }
+        @keyframes pulsedot { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+
+        .hero-greeting { font-size: 1.1rem; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+        .hero-name {
+            font-size: clamp(2.5rem,6vw,4rem); font-weight: 700; margin-bottom: 0.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-title { font-size: clamp(1.1rem,3vw,1.5rem); color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 400; min-height: 2em; }
+        .hero-desc { font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 2rem; line-height: 1.8; }
+
+        .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1.2rem; border: 1px solid var(--border); border-radius: 8px;
+            color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease;
+        }
+        .hero-link:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(88,166,255,0.15); }
+        .hero-link.primary { background: var(--accent-gradient); color: #fff; border: none; }
+        .hero-link.primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(88,166,255,0.3); }
+
+        /* ── Sections ── */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-header { margin-bottom: 3rem; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .section-title .icon {
+            font-size: 1.5rem; background: var(--accent-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-subtitle { color: var(--text-secondary); font-size: 1rem; }
+        .section-divider { width: 60px; height: 3px; background: var(--accent-gradient); border-radius: 2px; margin-top: 1rem; }
+
+        .alt-bg { background: var(--bg-secondary); }
+
+        /* ── Interest Cards ── */
+        .interest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .interest-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease;
+        }
+        .interest-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .interest-card .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .interest-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 600; }
+        .interest-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+        /* ── Education ── */
+        .edu-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem;
+            transition: all 0.3s ease; display: flex; gap: 2rem; align-items: flex-start;
+        }
+        .edu-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+        .edu-logo {
+            width: 64px; height: 64px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+            flex-shrink: 0; background: var(--tag-bg); border: 1px solid var(--tag-border);
+        }
+        .edu-info h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .edu-info .degree { color: var(--accent); font-weight: 500; font-size: 0.95rem; }
+        .edu-info .period { color: var(--text-secondary); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
+        .edu-info .details { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; }
+        .edu-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+        .tag {
+            display: inline-block; padding: 3px 10px;
+            background: var(--tag-bg); border: 1px solid var(--tag-border);
+            border-radius: 6px; font-size: 0.8rem; color: var(--accent); font-weight: 500;
+        }
+
+        /* ── Timeline ── */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .timeline-item { position: relative; padding-bottom: 2.5rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2rem; top: 6px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--accent); border: 3px solid var(--bg-primary); transform: translateX(-5px);
+        }
+        .timeline-item.active::before { box-shadow: 0 0 0 4px rgba(88,166,255,0.2); animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 0 0 4px rgba(88,166,255,0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(88,166,255,0.1); }
+        }
+        .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+        .timeline-title { font-size: 1.1rem; font-weight: 600; }
+        .timeline-period { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); white-space: nowrap; }
+        .timeline-subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .timeline-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+        .timeline-desc ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+        .timeline-desc li { margin-bottom: 0.3rem; }
+
+        /* ── Skills ── */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+        .skill-category { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; }
+        .skill-category:hover { border-color: var(--accent); }
+        .skill-category h3 { font-size: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 5px 12px; background: var(--tag-bg); border: 1px solid var(--tag-border);
+            border-radius: 6px; font-size: 0.85rem; color: var(--accent); font-weight: 500; transition: all 0.3s ease;
+        }
+        .skill-tag:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(88,166,255,0.15); }
+
+        /* ── Awards ── */
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .award-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease;
+        }
+        .award-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .award-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .award-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .award-info p { color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem; border-top: 1px solid var(--border); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .footer-links a { color: var(--text-secondary); font-size: 1.3rem; transition: all 0.3s ease; }
+        .footer-links a:hover { color: var(--accent); transform: translateY(-2px); }
+        .footer-text { color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* ── Animations ── */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .typing-cursor {
+            display: inline-block; width: 3px; height: 1.2em;
+            background: var(--accent); margin-left: 2px;
+            animation: blink 1s infinite; vertical-align: text-bottom;
+        }
+        @keyframes blink { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: absolute; top: 64px; left: 0; right: 0;
+                background: var(--bg-secondary); flex-direction: column;
+                padding: 1rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .interest-grid { grid-template-columns: 1fr; }
+            .edu-card { flex-direction: column; gap: 1rem; }
+            .timeline-header { flex-direction: column; }
+            .hero-links { flex-direction: column; }
+            .hero-link { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <span class="nav-logo">XSF</span>
+            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#interests">技术方向</a></li>
+                <li><a href="#education">教育背景</a></li>
+                <li><a href="#experience">工作经历</a></li>
+                <li><a href="#awards">竞赛荣誉</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="status">
+                <span class="status-dot"></span>
+                M.S. Student @ CityU (Dongguan) · Visiting @ 大湾区大学
+            </div>
+            <p class="hero-greeting">👋 Hi, I'm</p>
+            <h1 class="hero-name">谢深甫 &nbsp;<span style="font-size:0.55em; font-weight:500; -webkit-text-fill-color: var(--text-secondary); background: none; color: var(--text-secondary);">Xie Shenfu</span></h1>
+            <p class="hero-title" id="typingText"></p>
+            <p class="hero-desc">
+                生物医学工程硕士在读，就读于
+                <strong style="color: var(--text-primary);">香港城市大学（东莞）</strong>，
+                同时在<strong style="color: var(--text-primary);">大湾区大学</strong>担任访问学生参与医疗器械研发。
+                此前在<strong style="color: var(--text-primary);">深圳大学总医院</strong>担任医疗设备工程师近两年。
+                专注嵌入式硬件设计、可穿戴医疗系统及生物医学信号采集。
+            </p>
+            <div class="hero-links">
+                <a href="mailto:72520307@cityu-dg.edu.cn" class="hero-link primary">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://github.com/" class="hero-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="谢深甫个人简历.pdf" class="hero-link" target="_blank">
+                    <i class="fas fa-file-pdf"></i> 简历 CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Interests -->
+    <section id="interests">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span class="icon">🔬</span> 技术方向</h2>
+                <p class="section-subtitle">Exploring hardware-software co-design for medical applications</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="interest-grid">
+                <div class="interest-card fade-in">
+                    <div class="card-icon">📡</div>
+                    <h3>可穿戴超声系统</h3>
+                    <p>参与研发单探头可穿戴超声肌电系统与超声激发装置，负责硬件搭建、元器件焊接及信号采集核心模块，推动系统向小型化、可穿戴化演进。</p>
+                </div>
+                <div class="interest-card fade-in">
+                    <div class="card-icon">⚙️</div>
+                    <h3>嵌入式硬件设计</h3>
+                    <p>具备嵌入式硬件系统设计与调试经验，掌握单片机（合泰）底层开发，主导完成信号传输模块设计、PCB 制作及原型硬件联调。</p>
+                </div>
+                <div class="interest-card fade-in">
+                    <div class="card-icon">🏥</div>
+                    <h3>医疗器械工程</h3>
+                    <p>曾在三甲医院从事医疗设备工程师工作，掌握设备硬件维修、故障排查及全生命周期管理规范，积累丰富的临床硬件实战经验。</p>
+                </div>
+                <div class="interest-card fade-in">
+                    <div class="card-icon">📊</div>
+                    <h3>生物医学信号采集</h3>
+                    <p>熟悉生物医学测量与传感器原理，具备信号采集系统搭建能力，结合 C 语言编程实现嵌入式平台上的实时数据采集与处理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="alt-bg">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span class="icon">🎓</span> 教育背景</h2>
+                <p class="section-subtitle">Academic background and qualifications</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="edu-card fade-in">
+                <div class="edu-logo">🏛️</div>
+                <div class="edu-info">
+                    <h3>香港城市大学（东莞）</h3>
+                    <p class="degree">硕士 · 生物医学工程</p>
+                    <p class="period">2025.09 – 至今</p>
+                    <p class="details">广东省东莞市</p>
+                    <p class="details">主修课程：Biomedical Instrumentation · Flexible Bioelectronics for Medical Applications</p>
+                    <div class="edu-tags">
+                        <span class="tag">Biomedical Instrumentation</span>
+                        <span class="tag">Flexible Bioelectronics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edu-card fade-in">
+                <div class="edu-logo">🏛️</div>
+                <div class="edu-info">
+                    <h3>大湾区大学（访问学生）</h3>
+                    <p class="degree">访问学生 · 医疗器械研发</p>
+                    <p class="period">2025.09 – 至今</p>
+                    <p class="details">参与单探头可穿戴超声肌电系统及超声激发装置研发</p>
+                    <div class="edu-tags">
+                        <span class="tag">Wearable Ultrasound</span>
+                        <span class="tag">Hardware Prototyping</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edu-card fade-in">
+                <div class="edu-logo">🏛️</div>
+                <div class="edu-info">
+                    <h3>广东医科大学</h3>
+                    <p class="degree">学士 · 生物医学工程</p>
+                    <p class="period">2020.09 – 2024.07</p>
+                    <p class="details">加权平均分：86.09 / 100 &nbsp;·&nbsp; 广东省湛江市</p>
+                    <p class="details">大二学业年级排名第七 · 大三学业年级排名<strong style="color:var(--accent)">第一</strong></p>
+                    <p class="details">主修：医用 X 线机原理与设备 · 微机原理及接口技术 · 单片机原理及应用 · PCB 设计与制作 · 生物医学测量与传感器 · C++ 程序设计</p>
+                    <div class="edu-tags">
+                        <span class="tag">单片机</span>
+                        <span class="tag">PCB 设计</span>
+                        <span class="tag">生物医学传感器</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span class="icon">💼</span> 工作 & 项目经历</h2>
+                <p class="section-subtitle">Research projects and professional experience</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline">
+
+                <div class="timeline-item active fade-in">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">大湾区大学 · 医疗器械研发</h3>
+                        <span class="timeline-period">2025.09 – 至今</span>
+                    </div>
+                    <p class="timeline-subtitle">研发成员</p>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>参与研发<strong>单探头可穿戴超声肌电系统</strong>及超声激发装置</li>
+                            <li>负责硬件搭建、元器件焊接、信号采集核心工作</li>
+                            <li>推动系统向小型化、可穿戴化方向演进，适配医疗场景实际需求</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">深圳大学总医院 · 医疗设备工程师</h3>
+                        <span class="timeline-period">2023.11 – 2025.08</span>
+                    </div>
+                    <p class="timeline-subtitle">医疗设备工程师</p>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>负责医疗设备硬件<strong>维修、保养及全生命周期管理</strong></li>
+                            <li>对接第三方工程师，协同完成设备硬件升级与故障处理</li>
+                            <li>提升硬件问题独立解决能力及跨部门协作与沟通技能</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">无线可穿戴超声脑刺激系统</h3>
+                        <span class="timeline-period">2023.09 – 2024.06</span>
+                    </div>
+                    <p class="timeline-subtitle">核心研发成员 · 广东医科大学黎国锋老师课题组</p>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>主攻单片机硬件搭建、信号传输模块设计与调试</li>
+                            <li>实现系统<strong>硬件小型化、可穿戴化</strong>设计，适配医疗场景应用需求</li>
+                            <li>团队携项目参加广东省大学生 <strong>"合泰杯"单片机应用设计竞赛</strong>，积累嵌入式硬件攻关经验</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards -->
+    <section id="awards" class="alt-bg">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span class="icon">🏆</span> 竞赛 & 荣誉</h2>
+                <p class="section-subtitle">Competitions and academic honors</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="awards-grid">
+                <div class="award-card fade-in">
+                    <div class="award-icon">🥇</div>
+                    <div class="award-info">
+                        <h4>大三学业年级排名第一</h4>
+                        <p>广东医科大学 · 生物医学工程 · 2022-2023</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">⚡</div>
+                    <div class="award-info">
+                        <h4>广东省"合泰杯"单片机应用设计竞赛</h4>
+                        <p>广东省大学生 · 嵌入式硬件设计赛道 · 2024</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🎓</div>
+                    <div class="award-info">
+                        <h4>大二学业年级排名第七</h4>
+                        <p>广东医科大学 · 生物医学工程 · 2021-2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title"><span class="icon">⚡</span> 技能</h2>
+                <p class="section-subtitle">Technical skills and certifications</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-microchip" style="color:var(--accent)"></i> 硬件</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">嵌入式硬件设计</span>
+                        <span class="skill-tag">PCB 制作</span>
+                        <span class="skill-tag">焊接技术</span>
+                        <span class="skill-tag">单片机（合泰）</span>
+                        <span class="skill-tag">原型搭建</span>
+                        <span class="skill-tag">信号采集</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-code" style="color:var(--accent)"></i> 编程</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C 语言</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">嵌入式程序设计</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-stethoscope" style="color:var(--accent)"></i> 医疗器械</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">硬件维修</span>
+                        <span class="skill-tag">全生命周期管理</span>
+                        <span class="skill-tag">故障排查</span>
+                        <span class="skill-tag">设备保养</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-language" style="color:var(--accent)"></i> 语言 & 其他</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">雅思 6.0</span>
+                        <span class="skill-tag">英语六级</span>
+                        <span class="skill-tag">C1 驾驶证</span>
+                        <span class="skill-tag">中医针灸（中级）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="mailto:72520307@cityu-dg.edu.cn" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p class="footer-text">© 2026 谢深甫 · Built with ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+            document.getElementById('themeIcon').className = 'fas fa-sun';
+        }
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Typing animation
+        const titles = [
+            'Biomedical Engineer 🔬',
+            'Embedded Hardware Developer ⚙️',
+            'Medical Device Researcher 🏥',
+            'Wearable Systems Designer 📡'
+        ];
+        let titleIndex = 0, charIndex = 0, isDeleting = false;
+        const typingEl = document.getElementById('typingText');
+        function typeText() {
+            const cur = titles[titleIndex];
+            if (isDeleting) {
+                typingEl.innerHTML = cur.substring(0, charIndex - 1) + '<span class="typing-cursor"></span>';
+                charIndex--;
+            } else {
+                typingEl.innerHTML = cur.substring(0, charIndex + 1) + '<span class="typing-cursor"></span>';
+                charIndex++;
+            }
+            let speed = isDeleting ? 30 : 60;
+            if (!isDeleting && charIndex === cur.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; titleIndex = (titleIndex + 1) % titles.length; speed = 500; }
+            setTimeout(typeText, speed);
+        }
+        typeText();
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
