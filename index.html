@@ -389,6 +389,19 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* ── Signal Wave Dividers ── */
+        .wave-div {
+            width: 100%; height: 44px; overflow: hidden;
+            pointer-events: none; opacity: 0.42; position: relative;
+        }
+        .wave-svg { width: 200%; height: 100%; display: block; }
+        .wave-path { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .wscroll { animation: wave-roll 14s linear infinite; }
+        @keyframes wave-roll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
         /* ── Back to top ── */
         .back-to-top {
             position: fixed; bottom: 2rem; right: 2rem;
@@ -627,6 +640,13 @@
         </div>
     </section>
 
+    <!-- Sine Wave: Biomedical analog signal -->
+    <div class="wave-div">
+        <svg class="wave-svg wscroll" viewBox="0 0 2400 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-path" d="M0,25 C33,8 67,8 100,25 C133,42 167,42 200,25 C233,8 267,8 300,25 C333,42 367,42 400,25 C433,8 467,8 500,25 C533,42 567,42 600,25 C633,8 667,8 700,25 C733,42 767,42 800,25 C833,8 867,8 900,25 C933,42 967,42 1000,25 C1033,8 1067,8 1100,25 C1133,42 1167,42 1200,25 C1233,8 1267,8 1300,25 C1333,42 1367,42 1400,25 C1433,8 1467,8 1500,25 C1533,42 1567,42 1600,25 C1633,8 1667,8 1700,25 C1733,42 1767,42 1800,25 C1833,8 1867,8 1900,25 C1933,42 1967,42 2000,25 C2033,8 2067,8 2100,25 C2133,42 2167,42 2200,25 C2233,8 2267,8 2300,25 C2333,42 2367,42 2400,25"/>
+        </svg>
+    </div>
+
     <!-- Education -->
     <section id="education" class="alt-bg">
         <!-- Background circuit deco top-right -->
@@ -714,6 +734,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Square Wave: Digital MCU signal -->
+    <div class="wave-div">
+        <svg class="wave-svg wscroll" viewBox="0 0 2400 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-path" d="M0,12 L100,12 L100,38 L200,38 L200,12 L300,12 L300,38 L400,38 L400,12 L500,12 L500,38 L600,38 L600,12 L700,12 L700,38 L800,38 L800,12 L900,12 L900,38 L1000,38 L1000,12 L1100,12 L1100,38 L1200,38 L1200,12 L1300,12 L1300,38 L1400,38 L1400,12 L1500,12 L1500,38 L1600,38 L1600,12 L1700,12 L1700,38 L1800,38 L1800,12 L1900,12 L1900,38 L2000,38 L2000,12 L2100,12 L2100,38 L2200,38 L2200,12 L2300,12 L2300,38 L2400,38 L2400,12"/>
+        </svg>
+    </div>
 
     <!-- Experience -->
     <section id="experience">
@@ -807,6 +834,13 @@
         </div>
     </section>
 
+    <!-- Sawtooth: Capacitor charge/discharge -->
+    <div class="wave-div">
+        <svg class="wave-svg wscroll" viewBox="0 0 2400 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-path" d="M0,38 L150,10 L150,38 L300,10 L300,38 L450,10 L450,38 L600,10 L600,38 L750,10 L750,38 L900,10 L900,38 L1050,10 L1050,38 L1200,10 L1200,38 L1350,10 L1350,38 L1500,10 L1500,38 L1650,10 L1650,38 L1800,10 L1800,38 L1950,10 L1950,38 L2100,10 L2100,38 L2250,10 L2250,38 L2400,10"/>
+        </svg>
+    </div>
+
     <!-- Awards -->
     <section id="awards" class="alt-bg">
         <!-- Background circuit deco bottom-left -->
@@ -884,6 +918,13 @@
             </div>
         </div>
     </section>
+
+    <!-- PWM: Pulse Width Modulation -->
+    <div class="wave-div">
+        <svg class="wave-svg wscroll" viewBox="0 0 2400 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="wave-path" d="M0,38 L0,12 L60,12 L60,38 L200,38 L200,12 L260,12 L260,38 L400,38 L400,12 L460,12 L460,38 L600,38 L600,12 L660,12 L660,38 L800,38 L800,12 L860,12 L860,38 L1000,38 L1000,12 L1060,12 L1060,38 L1200,38 L1200,12 L1260,12 L1260,38 L1400,38 L1400,12 L1460,12 L1460,38 L1600,38 L1600,12 L1660,12 L1660,38 L1800,38 L1800,12 L1860,12 L1860,38 L2000,38 L2000,12 L2060,12 L2060,38 L2200,38 L2200,12 L2260,12 L2260,38 L2400,38"/>
+        </svg>
+    </div>
 
     <!-- Skills -->
     <section id="skills">
@@ -1129,7 +1170,28 @@
             }
         })();
 
-        // Card 3D tilt on hover
+        // Wave divider cycling – each divider fades out, switches waveform, fades back in every 9s
+        (function() {
+            const WF = [
+                "M0,25 C33,8 67,8 100,25 C133,42 167,42 200,25 C233,8 267,8 300,25 C333,42 367,42 400,25 C433,8 467,8 500,25 C533,42 567,42 600,25 C633,8 667,8 700,25 C733,42 767,42 800,25 C833,8 867,8 900,25 C933,42 967,42 1000,25 C1033,8 1067,8 1100,25 C1133,42 1167,42 1200,25 C1233,8 1267,8 1300,25 C1333,42 1367,42 1400,25 C1433,8 1467,8 1500,25 C1533,42 1567,42 1600,25 C1633,8 1667,8 1700,25 C1733,42 1767,42 1800,25 C1833,8 1867,8 1900,25 C1933,42 1967,42 2000,25 C2033,8 2067,8 2100,25 C2133,42 2167,42 2200,25 C2233,8 2267,8 2300,25 C2333,42 2367,42 2400,25",
+                "M0,12 L100,12 L100,38 L200,38 L200,12 L300,12 L300,38 L400,38 L400,12 L500,12 L500,38 L600,38 L600,12 L700,12 L700,38 L800,38 L800,12 L900,12 L900,38 L1000,38 L1000,12 L1100,12 L1100,38 L1200,38 L1200,12 L1300,12 L1300,38 L1400,38 L1400,12 L1500,12 L1500,38 L1600,38 L1600,12 L1700,12 L1700,38 L1800,38 L1800,12 L1900,12 L1900,38 L2000,38 L2000,12 L2100,12 L2100,38 L2200,38 L2200,12 L2300,12 L2300,38 L2400,38 L2400,12",
+                "M0,38 L150,10 L150,38 L300,10 L300,38 L450,10 L450,38 L600,10 L600,38 L750,10 L750,38 L900,10 L900,38 L1050,10 L1050,38 L1200,10 L1200,38 L1350,10 L1350,38 L1500,10 L1500,38 L1650,10 L1650,38 L1800,10 L1800,38 L1950,10 L1950,38 L2100,10 L2100,38 L2250,10 L2250,38 L2400,10",
+                "M0,38 L0,12 L60,12 L60,38 L200,38 L200,12 L260,12 L260,38 L400,38 L400,12 L460,12 L460,38 L600,38 L600,12 L660,12 L660,38 L800,38 L800,12 L860,12 L860,38 L1000,38 L1000,12 L1060,12 L1060,38 L1200,38 L1200,12 L1260,12 L1260,38 L1400,38 L1400,12 L1460,12 L1460,38 L1600,38 L1600,12 L1660,12 L1660,38 L1800,38 L1800,12 L1860,12 L1860,38 L2000,38 L2000,12 L2060,12 L2060,38 L2200,38 L2200,12 L2260,12 L2260,38 L2400,38"
+            ];
+            document.querySelectorAll('.wave-path').forEach((path, i) => {
+                let idx = i % WF.length;
+                setInterval(() => {
+                    path.style.transition = 'opacity 0.9s ease';
+                    path.style.opacity = '0';
+                    setTimeout(() => {
+                        idx = (idx + 1) % WF.length;
+                        path.setAttribute('d', WF[idx]);
+                        path.style.opacity = '1';
+                    }, 900);
+                }, 9000);
+            });
+        })();
+
         document.querySelectorAll('.interest-card, .award-card, .skill-category').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const r = card.getBoundingClientRect();
