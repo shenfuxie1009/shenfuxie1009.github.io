@@ -282,6 +282,22 @@
         }
         .stat-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem; }
 
+        /* ── Circuit Decoration ── */
+        .circuit-deco {
+            position: absolute; right: 2%; top: 50%; transform: translateY(-50%);
+            width: 340px; height: 340px; opacity: 0.055; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        [data-theme="light"] .circuit-deco { opacity: 0.04; }
+        .circuit-deco:hover { opacity: 0.1; }
+        .c-trace { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+        .c-via { fill: var(--accent); }
+        .c-chip { stroke: var(--accent); stroke-width: 1.8; fill: rgba(88,166,255,0.08); }
+        .c-comp { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+        .c-pulse { animation: cpulse 2.5s ease-in-out infinite; }
+        .c-pulse2 { animation: cpulse 2.5s ease-in-out infinite 1.2s; }
+        @keyframes cpulse { 0%,100%{opacity:1;} 50%{opacity:0.15;} }
+
         /* ── ECG Divider ── */
         .ecg-divider {
             width: 100%; overflow: hidden; height: 60px;
@@ -349,6 +365,90 @@
 
     <!-- Hero -->
     <section class="hero">
+
+        <!-- Circuit board decoration -->
+        <svg class="circuit-deco" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+            <!-- Traces -->
+            <g class="c-trace">
+                <path d="M20,60 L100,60 L100,20 L220,20 L220,60 L300,60"/>
+                <path d="M100,60 L100,130 L60,130 L60,200 L100,200"/>
+                <path d="M220,60 L220,130 L280,130 L280,190"/>
+                <path d="M100,200 L100,260 L160,260 L160,310"/>
+                <path d="M160,130 L160,60"/>
+                <path d="M160,130 L220,130"/>
+                <path d="M100,130 L160,130"/>
+                <path d="M280,190 L280,260 L220,260 L220,310"/>
+                <path d="M20,200 L60,200"/>
+                <path d="M300,60 L320,60 L320,130 L280,130"/>
+                <path d="M20,130 L60,130"/>
+                <path d="M160,260 L220,260"/>
+            </g>
+            <!-- Vias -->
+            <g class="c-via c-pulse">
+                <circle cx="100" cy="60" r="4.5"/>
+                <circle cx="220" cy="60" r="4.5"/>
+                <circle cx="100" cy="130" r="4.5"/>
+                <circle cx="160" cy="130" r="4.5"/>
+                <circle cx="220" cy="130" r="4.5"/>
+                <circle cx="280" cy="130" r="4.5"/>
+                <circle cx="100" cy="200" r="4.5"/>
+                <circle cx="160" cy="260" r="4.5"/>
+                <circle cx="220" cy="260" r="4.5"/>
+            </g>
+            <!-- IC Chip (main MCU) -->
+            <g class="c-chip">
+                <rect x="130" y="150" width="80" height="60" rx="4"/>
+                <!-- Pins left -->
+                <line x1="100" y1="163" x2="130" y2="163" class="c-trace"/>
+                <line x1="100" y1="180" x2="130" y2="180" class="c-trace"/>
+                <line x1="100" y1="197" x2="130" y2="197" class="c-trace"/>
+                <!-- Pins right -->
+                <line x1="210" y1="163" x2="240" y2="163" class="c-trace"/>
+                <line x1="210" y1="180" x2="240" y2="180" class="c-trace"/>
+                <line x1="210" y1="197" x2="240" y2="197" class="c-trace"/>
+                <!-- Pin 1 dot -->
+                <circle cx="138" cy="158" r="3" class="c-via"/>
+            </g>
+            <!-- Small IC chip 2 -->
+            <g class="c-chip">
+                <rect x="230" y="80" width="50" height="40" rx="3"/>
+                <line x1="220" y1="90" x2="230" y2="90" class="c-trace"/>
+                <line x1="220" y1="104" x2="230" y2="104" class="c-trace"/>
+                <line x1="280" y1="90" x2="290" y2="90" class="c-trace"/>
+                <line x1="280" y1="104" x2="290" y2="104" class="c-trace"/>
+            </g>
+            <!-- Resistor 1 -->
+            <g class="c-comp">
+                <line x1="20" y1="60" x2="45" y2="60"/>
+                <rect x="45" y="52" width="32" height="16" rx="3"/>
+                <line x1="77" y1="60" x2="100" y2="60"/>
+            </g>
+            <!-- Resistor 2 -->
+            <g class="c-comp">
+                <line x1="20" y1="130" x2="35" y2="130"/>
+                <rect x="35" y="122" width="25" height="16" rx="3"/>
+                <line x1="60" y1="130" x2="60" y2="130"/>
+            </g>
+            <!-- Capacitor -->
+            <g class="c-comp c-pulse2">
+                <line x1="280" y1="190" x2="280" y2="215"/>
+                <line x1="263" y1="215" x2="297" y2="215"/>
+                <line x1="263" y1="225" x2="297" y2="225"/>
+                <line x1="280" y1="225" x2="280" y2="260"/>
+            </g>
+            <!-- Inductor (coil) -->
+            <g class="c-comp">
+                <path d="M20,200 L35,200 Q38,193 42,200 Q46,207 50,200 Q54,193 58,200 L60,200"/>
+            </g>
+            <!-- Corner mounting holes -->
+            <circle cx="18" cy="18" r="6" class="c-comp"/>
+            <circle cx="322" cy="18" r="6" class="c-comp"/>
+            <circle cx="18" cy="322" r="6" class="c-comp"/>
+            <circle cx="322" cy="322" r="6" class="c-comp"/>
+            <!-- Board outline dashed -->
+            <rect x="8" y="8" width="324" height="324" rx="4" stroke-dasharray="8,5" class="c-trace" opacity="0.5"/>
+        </svg>
+
         <div class="hero-content">
             <div class="status">
                 <span class="status-dot"></span>
@@ -388,6 +488,9 @@
                 </a>
                 <a href="https://github.com/" class="hero-link" target="_blank">
                     <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="resume_shenfuxie.pdf" class="hero-link" target="_blank">
+                    <i class="fas fa-file-pdf"></i> CV / Resume
                 </a>
             </div>
         </div>
