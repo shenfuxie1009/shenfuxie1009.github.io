@@ -264,6 +264,48 @@
         }
         @keyframes blink { 0%,50% { opacity:1; } 51%,100% { opacity:0; } }
 
+        /* ── Hero Stats ── */
+        .hero-stats {
+            display: flex; gap: 1.2rem; margin-bottom: 2rem; flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center; padding: 0.9rem 1.4rem;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; transition: all 0.3s ease; min-width: 90px;
+        }
+        .stat-item:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .stat-number {
+            font-size: 1.7rem; font-weight: 700; display: block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stat-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem; }
+
+        /* ── ECG Divider ── */
+        .ecg-divider {
+            width: 100%; overflow: hidden; height: 60px;
+            opacity: 0.45; pointer-events: none;
+            background: linear-gradient(to right, var(--bg-primary), transparent 5%, transparent 95%, var(--bg-primary));
+        }
+        .ecg-svg { width: 200%; height: 100%; animation: ecg-scroll 10s linear infinite; }
+        @keyframes ecg-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── Back to top ── */
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 44px; height: 44px; background: var(--accent-gradient);
+            border: none; border-radius: 50%; color: #fff; font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(20px); transition: all 0.3s ease;
+            z-index: 999; box-shadow: 0 4px 16px rgba(88,166,255,0.35);
+        }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(88,166,255,0.45); }
+
         /* ── Responsive ── */
         @media (max-width: 768px) {
             .nav-links {
@@ -322,6 +364,24 @@
                 此前在<strong style="color: var(--text-primary);">深圳大学总医院</strong>担任医疗设备工程师近两年。
                 专注嵌入式硬件设计、可穿戴医疗系统及生物医学信号采集。
             </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="84.7" data-decimal="1">0</span>
+                    <p class="stat-label">GPA / 100</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4" data-decimal="0">0</span>
+                    <p class="stat-label">Projects</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="6" data-decimal="0">0</span>
+                    <p class="stat-label">Awards</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="2" data-decimal="0">0</span>
+                    <p class="stat-label">Yrs Experience</p>
+                </div>
+            </div>
             <div class="hero-links">
                 <a href="mailto:72520307@cityu-dg.edu.cn" class="hero-link primary">
                     <i class="fas fa-envelope"></i> Email
@@ -329,12 +389,28 @@
                 <a href="https://github.com/" class="hero-link" target="_blank">
                     <i class="fab fa-github"></i> GitHub
                 </a>
-                <a href="谢深甫个人简历.pdf" class="hero-link" target="_blank">
-                    <i class="fas fa-file-pdf"></i> 简历 CV
-                </a>
             </div>
         </div>
     </section>
+
+    <!-- ECG Divider -->
+    <div class="ecg-divider">
+        <svg class="ecg-svg" viewBox="0 0 2400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,30 L60,30 L65,27 L68,5 L71,42 L74,30 L80,30 L85,24 L90,24 L95,30
+                     L200,30 L260,30 L265,27 L268,5 L271,42 L274,30 L280,30 L285,24 L290,24 L295,30
+                     L400,30 L460,30 L465,27 L468,5 L471,42 L474,30 L480,30 L485,24 L490,24 L495,30
+                     L600,30 L660,30 L665,27 L668,5 L671,42 L674,30 L680,30 L685,24 L690,24 L695,30
+                     L800,30 L860,30 L865,27 L868,5 L871,42 L874,30 L880,30 L885,24 L890,24 L895,30
+                     L1000,30 L1060,30 L1065,27 L1068,5 L1071,42 L1074,30 L1080,30 L1085,24 L1090,24 L1095,30
+                     L1200,30 L1260,30 L1265,27 L1268,5 L1271,42 L1274,30 L1280,30 L1285,24 L1290,24 L1295,30
+                     L1400,30 L1460,30 L1465,27 L1468,5 L1471,42 L1474,30 L1480,30 L1485,24 L1490,24 L1495,30
+                     L1600,30 L1660,30 L1665,27 L1668,5 L1671,42 L1674,30 L1680,30 L1685,24 L1690,24 L1695,30
+                     L1800,30 L1860,30 L1865,27 L1868,5 L1871,42 L1874,30 L1880,30 L1885,24 L1890,24 L1895,30
+                     L2000,30 L2060,30 L2065,27 L2068,5 L2071,42 L2074,30 L2080,30 L2085,24 L2090,24 L2095,30
+                     L2200,30 L2260,30 L2265,27 L2268,5 L2271,42 L2274,30 L2280,30 L2285,24 L2290,24 L2295,30 L2400,30"
+                  fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        </svg>
+    </div>
 
     <!-- Technical Interests -->
     <section id="interests">
@@ -413,13 +489,13 @@
                     <h3>广东医科大学</h3>
                     <p class="degree">学士 · 生物医学工程</p>
                     <p class="period">2020.09 – 2024.07</p>
-                    <p class="details">加权平均分：86.09 / 100 &nbsp;·&nbsp; 广东省湛江市</p>
-                    <p class="details">大二学业年级排名第七 · 大三学业年级排名<strong style="color:var(--accent)">第一</strong></p>
-                    <p class="details">主修：医用 X 线机原理与设备 · 微机原理及接口技术 · 单片机原理及应用 · PCB 设计与制作 · 生物医学测量与传感器 · C++ 程序设计</p>
+                    <p class="details">GPA：84.7 / 100 &nbsp;·&nbsp; Rank: <strong style="color:var(--accent)">TOP 1</strong> &nbsp;·&nbsp; 广东省湛江市</p>
                     <div class="edu-tags">
                         <span class="tag">单片机</span>
                         <span class="tag">PCB 设计</span>
                         <span class="tag">生物医学传感器</span>
+                        <span class="tag">医学图像处理</span>
+                        <span class="tag">超声诊断</span>
                     </div>
                 </div>
             </div>
@@ -453,30 +529,63 @@
 
                 <div class="timeline-item fade-in">
                     <div class="timeline-header">
-                        <h3 class="timeline-title">深圳大学总医院 · 医疗设备工程师</h3>
-                        <span class="timeline-period">2023.11 – 2025.08</span>
+                        <h3 class="timeline-title">Shenzhen University General Hospital · Engineering Intern</h3>
+                        <span class="timeline-period">2023.11 – Present</span>
                     </div>
-                    <p class="timeline-subtitle">医疗设备工程师</p>
+                    <p class="timeline-subtitle">Medical Engineering Department · Maintenance and Servicing of Medical Equipment</p>
                     <div class="timeline-desc">
                         <ul>
-                            <li>负责医疗设备硬件<strong>维修、保养及全生命周期管理</strong></li>
-                            <li>对接第三方工程师，协同完成设备硬件升级与故障处理</li>
-                            <li>提升硬件问题独立解决能力及跨部门协作与沟通技能</li>
+                            <li>Recorded specific issues to determine whether faults are persistent or intermittent, then located subsequent fault areas systematically</li>
+                            <li>Checked power supply and grounding first to avoid misjudgment caused by unstable power supply</li>
+                            <li>Systematized circuit board checking: visible damage inspection → multimeter voltage testing → cable/connector security → solder joint inspection → oscilloscope diagnosis for complex faults</li>
+                            <li>Performed functional tests to ensure all restored functions operate correctly under practical working conditions</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="timeline-item fade-in">
                     <div class="timeline-header">
-                        <h3 class="timeline-title">无线可穿戴超声脑刺激系统</h3>
-                        <span class="timeline-period">2023.09 – 2024.06</span>
+                        <h3 class="timeline-title">Miniature Wireless Wearable Ultrasound Brain Stimulation System</h3>
+                        <span class="timeline-period">2022.12 – 2023.05</span>
                     </div>
-                    <p class="timeline-subtitle">核心研发成员 · 广东医科大学黎国锋老师课题组</p>
+                    <p class="timeline-subtitle">Core Developer · Supervisor: Prof. Guofeng Li, Guangdong Medical University</p>
                     <div class="timeline-desc">
                         <ul>
-                            <li>主攻单片机硬件搭建、信号传输模块设计与调试</li>
-                            <li>实现系统<strong>硬件小型化、可穿戴化</strong>设计，适配医疗场景应用需求</li>
-                            <li>团队携项目参加广东省大学生 <strong>"合泰杯"单片机应用设计竞赛</strong>，积累嵌入式硬件攻关经验</li>
+                            <li>Designed a miniature wearable wireless ultrasound transmitter with 4 modules: <strong>boost, power supply, remote control, and power amplification</strong></li>
+                            <li>Utilized DC-DC boost module to stabilize and amplify input voltage; employed 603040 lithium battery with PW6566 regulator to drive the microcontroller</li>
+                            <li>Selected FNYK-01 intelligent remote control (Tian R1A-M3-433 chip) for signal reception and processing</li>
+                            <li>Demonstrated device performance via ultrasound stimulation on rats; achieved <strong>reduced equipment volume, increased portability</strong> and enhanced experimental accuracy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Pulse Measurement System Based on STC89C51 Microcontroller</h3>
+                        <span class="timeline-period">2022.11 – 2023.05</span>
+                    </div>
+                    <p class="timeline-subtitle">Electronic Design Competition · Dept. of Biomedical Engineering, Guangdong Medical University</p>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Selected STC89C51 as control core; integrated temperature sensor, infrared temperature measurement module and LCD display</li>
+                            <li>Chose DS18B20 sensor for superior accuracy and system stability in temperature measurement</li>
+                            <li>Implemented contactless infrared temperature measurement for enhanced safety; conducted final soldering and layout optimization</li>
+                            <li>Diagnosed and resolved hardware faults using <strong>logic analyzers and digital multimeters</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-header">
+                        <h3 class="timeline-title">Ultrasound Wave Analysis in Medical Imaging</h3>
+                        <span class="timeline-period">2022.11 – 2023.05</span>
+                    </div>
+                    <p class="timeline-subtitle">Research Project · Dept. of Biomedical Engineering, Guangdong Medical University</p>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Studied A-mode and B-mode ultrasound imaging principles for tissue distance/size assessment and 2D image acquisition</li>
+                            <li>Used <strong>MATLAB</strong> to perform Hilbert transformation on RF data to obtain signal envelope and achieve A-mode imaging</li>
+                            <li>Converted RF data into B-mode images via threshold segmentation and morphological operations; measured blood vessel diameters</li>
                         </ul>
                     </div>
                 </div>
@@ -495,24 +604,45 @@
             </div>
             <div class="awards-grid">
                 <div class="award-card fade-in">
-                    <div class="award-icon">🥇</div>
+                    <div class="award-icon">�</div>
                     <div class="award-info">
-                        <h4>大三学业年级排名第一</h4>
-                        <p>广东医科大学 · 生物医学工程 · 2022-2023</p>
+                        <h4>Third Prize · 7th Electronic Design Competition</h4>
+                        <p>Guangdong Medical University · 2023</p>
                     </div>
                 </div>
                 <div class="award-card fade-in">
-                    <div class="award-icon">⚡</div>
+                    <div class="award-icon">🏅</div>
                     <div class="award-info">
-                        <h4>广东省"合泰杯"单片机应用设计竞赛</h4>
-                        <p>广东省大学生 · 嵌入式硬件设计赛道 · 2024</p>
+                        <h4>Finalist · Guangdong Province "Hetai Cup" MCU Design Competition</h4>
+                        <p>Guangdong Provincial Competition · Embedded Hardware Track · 2023</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🥇</div>
+                    <div class="award-info">
+                        <h4>Academic Second Prize · 2022-2023</h4>
+                        <p>Guangdong Medical University · Rank TOP 1 · 2023</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">🌿</div>
+                    <div class="award-info">
+                        <h4>Certificate in Traditional Chinese Acupuncture (Intermediate)</h4>
+                        <p>Professional Qualification · 2022</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">⭐</div>
+                    <div class="award-info">
+                        <h4>Outstanding Student Cadre Award</h4>
+                        <p>Guangdong Medical University · 2022 &amp; 2021</p>
                     </div>
                 </div>
                 <div class="award-card fade-in">
                     <div class="award-icon">🎓</div>
                     <div class="award-info">
-                        <h4>大二学业年级排名第七</h4>
-                        <p>广东医科大学 · 生物医学工程 · 2021-2022</p>
+                        <h4>Academic Third Prize · 2021-2022 &amp; 2020-2021</h4>
+                        <p>Guangdong Medical University · 2022 &amp; 2021</p>
                     </div>
                 </div>
             </div>
@@ -540,29 +670,43 @@
                     </div>
                 </div>
                 <div class="skill-category fade-in">
-                    <h3><i class="fas fa-code" style="color:var(--accent)"></i> 编程</h3>
+                    <h3><i class="fas fa-code" style="color:var(--accent)"></i> Programming</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">C 语言</span>
+                        <span class="skill-tag">C</span>
                         <span class="skill-tag">C++</span>
-                        <span class="skill-tag">嵌入式程序设计</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Assembly</span>
                     </div>
                 </div>
                 <div class="skill-category fade-in">
-                    <h3><i class="fas fa-stethoscope" style="color:var(--accent)"></i> 医疗器械</h3>
+                    <h3><i class="fas fa-drafting-compass" style="color:var(--accent)"></i> EDA & Simulation</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">硬件维修</span>
-                        <span class="skill-tag">全生命周期管理</span>
-                        <span class="skill-tag">故障排查</span>
-                        <span class="skill-tag">设备保养</span>
+                        <span class="skill-tag">Altium Designer</span>
+                        <span class="skill-tag">Keil uVision</span>
+                        <span class="skill-tag">Tina-TI</span>
+                        <span class="skill-tag">EDA Software</span>
+                        <span class="skill-tag">DOSBox / MASM</span>
                     </div>
                 </div>
                 <div class="skill-category fade-in">
-                    <h3><i class="fas fa-language" style="color:var(--accent)"></i> 语言 & 其他</h3>
+                    <h3><i class="fas fa-stethoscope" style="color:var(--accent)"></i> Medical Equipment</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">雅思 6.0</span>
-                        <span class="skill-tag">英语六级</span>
-                        <span class="skill-tag">C1 驾驶证</span>
-                        <span class="skill-tag">中医针灸（中级）</span>
+                        <span class="skill-tag">Hardware Maintenance</span>
+                        <span class="skill-tag">Lifecycle Management</span>
+                        <span class="skill-tag">Fault Diagnosis</span>
+                        <span class="skill-tag">Oscilloscope</span>
+                        <span class="skill-tag">Multimeter</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-language" style="color:var(--accent)"></i> Language & Other</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">IELTS 6.0</span>
+                        <span class="skill-tag">CET-6</span>
+                        <span class="skill-tag">Driver License C1</span>
+                        <span class="skill-tag">TCM Acupuncture (Intermediate)</span>
                     </div>
                 </div>
             </div>
@@ -579,6 +723,11 @@
             <p class="footer-text">© 2026 谢深甫 · Built with ❤️</p>
         </div>
     </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <script>
         // Theme toggle
@@ -649,6 +798,39 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
+        });
+
+        // Animated counters
+        function animateCounter(el) {
+            const target = parseFloat(el.getAttribute('data-target'));
+            const decimal = parseInt(el.getAttribute('data-decimal') || '0');
+            const duration = 1600;
+            const steps = duration / 16;
+            const step = target / steps;
+            let current = 0;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(timer); }
+                el.textContent = current.toFixed(decimal);
+            }, 16);
+        }
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
