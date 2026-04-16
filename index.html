@@ -404,6 +404,32 @@
             to   { transform: translateX(-50%); }
         }
 
+        /* ── Sakura Petals ── */
+        @keyframes sakura-a {
+            0%   { transform:translateY(0)     translateX(0)    rotate(0deg);   opacity:0 }
+            8%   { opacity:0.9 }
+            30%  { transform:translateY(28vh)  translateX(55px) rotate(110deg) }
+            65%  { transform:translateY(65vh)  translateX(-42px) rotate(260deg) }
+            88%  { opacity:0.65 }
+            100% { transform:translateY(108vh) translateX(22px)  rotate(400deg); opacity:0 }
+        }
+        @keyframes sakura-b {
+            0%   { transform:translateY(0)     translateX(0)     rotate(0deg);   opacity:0 }
+            8%   { opacity:0.9 }
+            35%  { transform:translateY(35vh)  translateX(-52px) rotate(135deg) }
+            60%  { transform:translateY(60vh)  translateX(38px)  rotate(275deg) }
+            88%  { opacity:0.65 }
+            100% { transform:translateY(108vh) translateX(-28px) rotate(415deg); opacity:0 }
+        }
+        @keyframes sakura-c {
+            0%   { transform:translateY(0)    translateX(0)    rotate(0deg);   opacity:0 }
+            8%   { opacity:0.9 }
+            40%  { transform:translateY(40vh) translateX(32px) rotate(150deg) }
+            70%  { transform:translateY(70vh) translateX(-58px) rotate(325deg) }
+            88%  { opacity:0.65 }
+            100% { transform:translateY(108vh) translateX(36px) rotate(455deg); opacity:0 }
+        }
+
         /* ── Back to top ── */
         .back-to-top {
             position: fixed; bottom: 2rem; right: 2rem;
@@ -1221,6 +1247,30 @@
                     }, 900);
                 }, 9000);
             });
+        })();
+
+        // Falling sakura petals
+        (function(){
+            const clrs=['#fce7f3','#f9a8d4','#fbcfe8','rgba(255,240,250,0.95)','rgba(255,255,255,0.9)','#ffd6ec'];
+            const anims=['sakura-a','sakura-b','sakura-c'];
+            function mkPetal(){
+                const el=document.createElement('div');
+                const sz=Math.random()*12+7;
+                el.style.cssText=[
+                    'position:fixed','pointer-events:none','z-index:9998',
+                    `left:${Math.random()*(window.innerWidth+120)-60}px`,'top:-24px',
+                    `width:${sz}px`,`height:${sz*1.4}px`,
+                    `background:${clrs[Math.floor(Math.random()*clrs.length)]}`,
+                    'border-radius:50% 0 50% 0',
+                    `transform:rotate(${Math.random()*360}deg)`,
+                    `animation:${anims[Math.floor(Math.random()*3)]} ${Math.random()*9+10}s ${Math.random()*2}s linear forwards`,
+                    'box-shadow:0 0 4px rgba(244,114,182,0.2)'
+                ].join(';');
+                document.body.appendChild(el);
+                setTimeout(()=>el.remove(),(Math.random()*9+12.5)*1000);
+            }
+            for(let i=0;i<14;i++) setTimeout(mkPetal,i*320);
+            setInterval(mkPetal,700);
         })();
 
         document.querySelectorAll('.interest-card, .award-card, .skill-category').forEach(card => {
